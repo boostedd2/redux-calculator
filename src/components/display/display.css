@@ -1,0 +1,12 @@
+.display-container {
+  display: flex;
+  margin: 20px;
+}
+
+.display-contents {
+  flex: 1;
+  width: 0px;
+  height: 80px;
+  font-size: 50px;
+  text-align: center;
+}

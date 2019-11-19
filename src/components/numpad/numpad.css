@@ -1,0 +1,8 @@
+.number-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.number-row-container {
+    display: flex;
+}

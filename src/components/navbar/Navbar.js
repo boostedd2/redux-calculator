@@ -6,9 +6,8 @@ const Navbar = () => {
     <div className="menu-container">
       <div className="menu-title">Redux Calculator</div>
       <div className="menu-item-list-container">
-        <div className="menu-item-list">
-          <div className="menu-item">Styled after Win10 Calculator</div>
-        </div>
+        <div className="menu-item-list"></div>
+        <div className="menu-item"></div>
       </div>
     </div>
   )

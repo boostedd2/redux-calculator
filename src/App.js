@@ -9,11 +9,8 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      <div className="main-container">
-        <Display />
-        <Numpad />
-      </div>
-      
+      <Display />
+      <Numpad />
     </div>
   );
 }

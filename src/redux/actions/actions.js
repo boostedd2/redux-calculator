@@ -1,0 +1,3 @@
+export const FIRST_NUMBER = "FIRST_NUMBER"
+export const SECOND_NUMBER = "SECOND_NUMBER"
+export const OPERATOR = "OPERATOR"

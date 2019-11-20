@@ -32,7 +32,7 @@ const Numpad = () => {
       <div className="number-row-container">
         <NumberButton number="+/_"/>
         <NumberButton number="0"/>
-        <NumberButton number="9"/>
+        <NumberButton number="."/>
         <NumberButton number="-"/>
       </div>
       <div className="number-row-container"></div>

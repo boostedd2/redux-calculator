@@ -10,6 +10,8 @@ var method = ''
 const getInput = (input) => {
   if (input === "CE") {
     numbers = []
+    number1 = 0
+    number2 = 0
   } else if (input === "C") {
       numbers = []
   } else if (input === "M1") {
@@ -17,20 +19,53 @@ const getInput = (input) => {
   } else if (input === "M2") {
       var memory2 = input
   } else if (input === "*") {
-    number1 = numbers.join("")
+    setNumber()
     method = "multiply"
+    console.log(number1)
+    console.log(number2)
+    number1 = 0
+    number2 = 0
   } else if (input === "/") {
-    number1 = numbers.join("")
+    setNumber()
     method = "divide"
+    console.log(number1)
+    console.log(number2)
+    number1 = 0
+    number2 = 0
   } else if (input === "+") {
-    number1 = numbers.join("")
+    setNumber()
     method = "addition"
+    console.log(number1)
+    console.log(number2)
+    number1 = 0
+    number2 = 0
   } else if (input === "-") {
-    number1 = numbers.join("")
+    setNumber()
     method = "subtract"
+    console.log(number1)
+    console.log(number2)
+    number1 = 0
+    number2 = 0
+  } else if (input === "D") {
+    console.log(number1)
+    console.log(number2)
+  } else if (input === "=") {
+    setNumber()
+    console.log("number 1 is " + number1)
+    console.log("number 2 is " + number2)
   } else {
     numbers.push(input)
     console.log(numbers.join(""))
+  }
+}
+
+const setNumber = () => {
+  if (number1 === 0) {
+    number1 = numbers.join("")
+    numbers = []
+  } else if (number2 === 0) {
+    number2 = numbers.join("")
+    numbers = []
   }
 }
 

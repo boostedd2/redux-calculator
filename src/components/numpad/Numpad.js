@@ -35,7 +35,7 @@ const Numpad = () => {
         <NumberButton number="."/>
         <NumberButton number="-"/>
       </div>
-      <div className="number-row-container"></div>
+      <div className="number-row-container"><NumberButton number="D"/><NumberButton number="="/></div>
       <div className="number-row-container"></div>
     </div>
   )

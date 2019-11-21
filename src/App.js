@@ -4,7 +4,6 @@ import { Provider } from 'react-redux'
 import './App.css';
 import './container.css'
 import Navbar from './components/navbar/Navbar'
-import Display from './components/display/Display'
 import Numpad from './components/numpad/Numpad'
 import reducer from './redux/reducers/reducer'
 
@@ -17,7 +16,6 @@ function App() {
     <Provider store ={store}>
       <div className="App">
         <Navbar />
-        <Display />
         <Numpad messageState={messageState} />
       </div>
     </Provider>

@@ -9,8 +9,9 @@ const Numpad = () => {
 
   function handleInput(e) {
     numbers.push(e.target.value)
-    setResults(numbers.join(""))
-    setDisplay(numbers.join(""))
+    var nums = numbers.join("")
+    setResults(nums)
+    setDisplay(nums)
   }
 
   function clearDisplay() {
@@ -20,8 +21,8 @@ const Numpad = () => {
   }
 
   function calculate() {
-    setDisplay(eval(display))
-    numbers = [display]
+    numbers = [eval(results)]
+    setDisplay(eval(results))
   }
 
   return(

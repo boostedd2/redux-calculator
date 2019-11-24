@@ -1,0 +1,63 @@
+.display-container {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.display-contents {
+    flex: 1;
+    height: 80px;
+    width: 80%;
+    font-size: 50px;
+    text-align: right;
+    background-color: aliceblue;
+}
+
+.number-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.number-row-container {
+    display: flex;
+}
+
+.number-button {
+    flex: 1;
+    padding:20px;
+    font-size: 3em;
+    background: white;
+    outline: none;
+}
+
+.nums {
+    background: rgb(218, 212, 212);
+}
+
+.operator {
+    background: rgb(121, 121, 121);
+    color: white;
+}
+
+.mem {
+    background: rgb(214, 175, 181);
+}
+
+.cls-all {
+    background: rgb(230, 109, 109);
+}
+
+.cls {
+    background: rgb(238, 129, 5);
+}
+
+.negative-tog {
+    background: rgb(243, 223, 255);
+}
+
+.dec {
+    background: rgb(235, 233, 233);
+}
+
+.equal {
+    background: rgb(255, 235, 147);
+}

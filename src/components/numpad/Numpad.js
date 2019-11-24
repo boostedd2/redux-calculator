@@ -1,19 +1,28 @@
 import React, { useState } from 'react'
-import './numpad.css'
+import './calc.css'
 
 var numbers = []
+var dupOps = ['x', '÷', '+', '-']
 
 const Numpad = () => {
+  //display and calulate are seperate values
   const [results, setResults] = useState( 0 )
   const [display, setDisplay] = useState( 0 )
 
   function handleInput(e) {
-    numbers.push(e.target.value)
-    var nums = numbers.join("")
-    setResults(nums)
+    var lastItem = numbers.slice(-1)[0]
+    if (!dupOps.includes(e.target.value)) {
+      numbers.push(e.target.value)
+    } else if (!dupOps.includes(lastItem)) {
+        if (numbers[0]) {
+          numbers.push(e.target.value)
+        }
+    }
+      var nums = numbers.join("")
+    //keep the display pretty, but feed usable expressions to eval
+    setResults(nums.replace(/x/, "*").replace(/÷/, "/"))
     setDisplay(nums)
   }
-
   function clearDisplay() {
     numbers = []
     setResults( 0 )
@@ -21,8 +30,10 @@ const Numpad = () => {
   }
 
   function calculate() {
-    numbers = [eval(results)]
-    setDisplay(eval(results))
+    //numbers set to continue longer operations
+    var calculated = eval(results)
+    numbers = [calculated]
+    setDisplay(calculated)
   }
 
   return(
@@ -32,34 +43,34 @@ const Numpad = () => {
     </div>
     <div className="number-container">
       <div className="number-row-container">
-        <button className="number-button" type="button">M1</button>
-        <button className="number-button" type="button">M2</button>
-        <button className="number-button" type="button" onClick={() => clearDisplay()}>CE</button>
-        <button className="number-button" type="button" onClick={() => clearDisplay()}>C</button>
+        <button className="number-button mem" type="button">M</button>
+        <button className="number-button cls-all" type="button" onClick={() => clearDisplay()}>CE</button>
+        <button className="number-button cls" type="button" onClick={() => clearDisplay()}>C</button>
+        <button className="number-button operator" type="button" value="x" onClick={e => handleInput(e, "value")}>x</button>
       </div>
       <div className="number-row-container">
-        <button className="number-button" type="button" value="7" onClick={e => handleInput(e, "value")}>7</button>
-        <button className="number-button" type="button" value="8" onClick={e => handleInput(e, "value")}>8</button>
-        <button className="number-button" type="button" value="9" onClick={e => handleInput(e, "value")}>9</button>
-        <button className="number-button" type="button" value="x" onClick={e => handleInput(e, "value")}>X</button>
+        <button className="number-button nums" type="button" value="7" onClick={e => handleInput(e, "value")}>7</button>
+        <button className="number-button nums" type="button" value="8" onClick={e => handleInput(e, "value")}>8</button>
+        <button className="number-button nums" type="button" value="9" onClick={e => handleInput(e, "value")}>9</button>
+        <button className="number-button operator" type="button" value="÷" onClick={e => handleInput(e, "value")}>÷</button>
       </div>
       <div className="number-row-container">
-        <button className="number-button" type="button" value="4" onClick={e => handleInput(e, "value")}>4</button>
-        <button className="number-button" type="button" value="5" onClick={e => handleInput(e, "value")}>5</button>
-        <button className="number-button" type="button" value="6" onClick={e => handleInput(e, "value")}>6</button>
-        <button className="number-button" type="button" value="÷" onClick={e => handleInput(e, "value")}>÷</button>
+        <button className="number-button nums" type="button" value="4" onClick={e => handleInput(e, "value")}>4</button>
+        <button className="number-button nums" type="button" value="5" onClick={e => handleInput(e, "value")}>5</button>
+        <button className="number-button nums" type="button" value="6" onClick={e => handleInput(e, "value")}>6</button>
+        <button className="number-button operator" type="button" value="+" onClick={e => handleInput(e, "value")}>+</button>
       </div>
       <div className="number-row-container">
-        <button className="number-button" type="button" value="1" onClick={e => handleInput(e, "value")}>1</button>
-        <button className="number-button" type="button" value="2" onClick={e => handleInput(e, "value")}>2</button>
-        <button className="number-button" type="button" value="3" onClick={e => handleInput(e, "value")}>3</button>
-        <button className="number-button" type="button" value="+" onClick={e => handleInput(e, "value")}>+</button>
+        <button className="number-button nums" type="button" value="1" onClick={e => handleInput(e, "value")}>1</button>
+        <button className="number-button nums" type="button" value="2" onClick={e => handleInput(e, "value")}>2</button>
+        <button className="number-button nums" type="button" value="3" onClick={e => handleInput(e, "value")}>3</button>
+        <button className="number-button operator" type="button" value="-" onClick={e => handleInput(e, "value")}>-</button>
       </div>
       <div className="number-row-container">
-        <button className="number-button" type="button">+/-</button>
-        <button className="number-button" type="button" value="0" onClick={e => handleInput(e, "value")}>0</button>
-        <button className="number-button" type="button" value="." onClick={e => handleInput(e, "value")}>.</button>
-        <button className="number-button" type="button" onClick={() => calculate()}>=</button>
+        <button className="number-button negative-tog" type="button">+/-</button>
+        <button className="number-button nums" type="button" value="0" onClick={e => handleInput(e, "value")}>0</button>
+        <button className="number-button dec" type="button" value="." onClick={e => handleInput(e, "value")}>.</button>
+        <button className="number-button equal" type="button" onClick={() => calculate()}>=</button>
       </div>
     </div>
     </>

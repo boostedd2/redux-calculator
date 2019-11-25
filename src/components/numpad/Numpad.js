@@ -20,9 +20,12 @@ const Numpad = () => {
     }
       var nums = numbers.join("")
     //keep the display pretty, but feed usable expressions to eval
-    setResults(nums.replace(/x/, "*").replace(/÷/, "/"))
-    setDisplay(nums)
+    setResults(nums.replace(/x/g, "*").replace(/÷/g, "/"))
+    if (nums) {
+      setDisplay(nums)
+    }
   }
+
   function clearDisplay() {
     numbers = []
     setResults( 0 )
@@ -30,10 +33,25 @@ const Numpad = () => {
   }
 
   function calculate() {
-    //numbers set to continue longer operations
+    //continue operations from "numbers", display results
     var calculated = eval(results)
     numbers = [calculated]
     setDisplay(calculated)
+    if (numbers[0] === 0) {
+      numbers = []
+      setDisplay( 0 )
+    }
+  }
+
+  function toggleNegative() {
+    var copyResults = numbers.slice(-1)
+    copyResults[0] = parseInt(copyResults[0])
+    var selectReplacement = copyResults[0] - (copyResults[0]*2)
+    numbers.pop()
+    numbers.push(selectReplacement.toString())
+    var toggledNum = numbers.join("")
+    setResults(toggledNum)
+    setDisplay(toggledNum)
   }
 
   return(
@@ -67,7 +85,7 @@ const Numpad = () => {
         <button className="number-button operator" type="button" value="-" onClick={e => handleInput(e, "value")}>-</button>
       </div>
       <div className="number-row-container">
-        <button className="number-button negative-tog" type="button">+/-</button>
+        <button className="number-button negative-tog" type="button" onClick={() => toggleNegative()}>+/-</button>
         <button className="number-button nums" type="button" value="0" onClick={e => handleInput(e, "value")}>0</button>
         <button className="number-button dec" type="button" value="." onClick={e => handleInput(e, "value")}>.</button>
         <button className="number-button equal" type="button" onClick={() => calculate()}>=</button>

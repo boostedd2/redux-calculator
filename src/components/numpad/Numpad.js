@@ -46,12 +46,20 @@ const Numpad = () => {
 
   function toggleNegative() {
     //toggles the current number in focus
-    var selectNum = numbers.slice(-1)
-    selectNum[0] = parseInt(selectNum[0])
-    var replacement = selectNum[0] - (selectNum[0]*2)
+    var lowerSlice = decimalCheck()
+    if (lowerSlice === undefined) {
+      var selectNum = numbers.join("")
+    } else {
+      var selectNum = numbers.slice(lowerSlice).join("")
+    }
+    var replacement = selectNum - (selectNum*2)
     var finishedReplacement = replacement.toString()
     if (finishedReplacement !== "NaN") {
-      numbers.pop()
+      if (lowerSlice === undefined) {
+        numbers = []
+      } else {
+        numbers = numbers.slice(0,lowerSlice)
+      }
       numbers.push(finishedReplacement)
       var toggledNum = numbers.join("")
       setResults(toggledNum.replace(/x/g, "*").replace(/÷/g, "/"))
@@ -59,9 +67,9 @@ const Numpad = () => {
     }
   }
 
+
   function decimalCheck() {
     //slice correct value to pass for toggleNegative logic, uses additional array method
-    console.log(numbers)
     if (numbers.length === 1) {
       var sepNumbers = numbers[0].toString().split("")
       var numberScope = numberScope-1
@@ -69,11 +77,15 @@ const Numpad = () => {
       // eslint-disable-next-line
       var sepNumbers = numbers
     }
-    var startIndex = sepNumbers.multiIndexOf(".").slice(-1)[0]
-    var lowerIndex = startIndex - 1
+    for (const [index, element] of sepNumbers.entries()) {
+      if (['x', '÷', '+', '-'].includes(element)) {
+        var lowerIndex = index + 1
+      }
+    }
     var focusedNumber = numbers.slice(lowerIndex).join("")
-    console.log("Total:")
-    console.log(focusedNumber)
+    var restNumber = numbers.slice(0, lowerIndex).join("")
+
+    return lowerIndex
   }
 
   //extends array object, adds method to find duplicate items index
@@ -123,7 +135,6 @@ const Numpad = () => {
         <button className="number-button nums" type="button" value="0" onClick={e => handleInput(e, "value")}>0</button>
         <button className="number-button dec" type="button" value="." onClick={e => handleInput(e, "value")}>.</button>
         <button className="number-button equal" type="button" onClick={() => calculate()}>=</button>
-        <button className="number-button equal" type="button" onClick={() => decimalCheck()}>D</button>
       </div>
     </div>
     </>

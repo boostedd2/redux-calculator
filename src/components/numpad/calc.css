@@ -5,7 +5,7 @@
 
 .display-contents {
     flex: 1;
-    height: 80px;
+    height: 12vh;
     width: 80%;
     font-size: 50px;
     text-align: right;
@@ -41,7 +41,7 @@
 }
 
 .mem {
-    background: rgb(214, 175, 181);
+    background: lightcyan;
 }
 
 .cls-all {

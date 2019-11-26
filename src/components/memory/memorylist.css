@@ -1,0 +1,21 @@
+.memory-list-container {
+    display: flex;
+    flex-direction: column;
+    margin-top:20px;
+}
+
+.memory-item-container {
+    display: flex;
+    padding-bottom: 40px;
+}
+
+.memory-item {
+    margin-left: 30px;
+    color: green;
+}
+
+.dismiss-button {
+    margin-left: auto;
+    margin-right: 30px;
+    color: red;
+}

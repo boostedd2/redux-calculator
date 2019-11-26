@@ -46,27 +46,34 @@ const Numpad = () => {
 
   function toggleNegative() {
     //toggles the current number in focus
-    var lowerSlice = decimalCheck()
-    if (lowerSlice === undefined) {
-      var selectNum = numbers.join("")
-    } else {
-      var selectNum = numbers.slice(lowerSlice).join("")
-    }
-    var replacement = selectNum - (selectNum*2)
-    var finishedReplacement = replacement.toString()
-    if (finishedReplacement !== "NaN") {
+    if (numbers[0] !== null) {
+      var lowerSlice = decimalCheck()
       if (lowerSlice === undefined) {
-        numbers = []
+        var selectNum = numbers.join("")
       } else {
-        numbers = numbers.slice(0,lowerSlice)
+        // eslint-disable-next-line
+        var selectNum = numbers.slice(lowerSlice).join("")
       }
-      numbers.push(finishedReplacement)
-      var toggledNum = numbers.join("")
-      setResults(toggledNum.replace(/x/g, "*").replace(/÷/g, "/"))
-      setDisplay(toggledNum)
+      var replacement = selectNum - (selectNum*2)
+      var finishedReplacement = replacement.toString()
+      if (finishedReplacement !== "NaN") {
+        if (lowerSlice === undefined) {
+          numbers = []
+        } else {
+          numbers = numbers.slice(0,lowerSlice)
+        }
+        if (finishedReplacement === "0") {
+          finishedReplacement = null
+          numbers.push(finishedReplacement)
+        } else {
+          numbers.push(finishedReplacement)
+        }
+        var toggledNum = numbers.join("")
+        setResults(toggledNum.replace(/x/g, "*").replace(/÷/g, "/"))
+        setDisplay(toggledNum)
+      }
     }
   }
-
 
   function decimalCheck() {
     //slice correct value to pass for toggleNegative logic, uses additional array method
@@ -82,9 +89,6 @@ const Numpad = () => {
         var lowerIndex = index + 1
       }
     }
-    var focusedNumber = numbers.slice(lowerIndex).join("")
-    var restNumber = numbers.slice(0, lowerIndex).join("")
-
     return lowerIndex
   }
 

@@ -7,7 +7,7 @@ const Navbar = () => {
       <div className="menu-title">Redux Calculator</div>
       <div className="menu-item-list-container">
         <div className="menu-item-list"></div>
-        <div className="menu-item"></div>
+        <div className="menu-item">Memory</div>
       </div>
     </div>
   )

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './calc.css'
 
 var numbers = []
-var dupOps = ['x', '÷', '+', '-']
+var dupOps = ['x', '÷', '+', '-', '.']
 
 const Numpad = () => {
   //display and calulate are seperate values
@@ -19,7 +19,7 @@ const Numpad = () => {
         }
     }
       var nums = numbers.join("")
-    //keep the display pretty, but feed usable expressions to eval
+    //keep the display readable, but pass usable expressions to eval
     setResults(nums.replace(/x/g, "*").replace(/÷/g, "/"))
     if (nums) {
       setDisplay(nums)
@@ -33,7 +33,8 @@ const Numpad = () => {
   }
 
   function calculate() {
-    //continue operations from "numbers", display results
+    //continue operations from results and/or display results
+    // eslint-disable-next-line
     var calculated = eval(results)
     numbers = [calculated]
     setDisplay(calculated)
@@ -44,15 +45,48 @@ const Numpad = () => {
   }
 
   function toggleNegative() {
-    var copyResults = numbers.slice(-1)
-    copyResults[0] = parseInt(copyResults[0])
-    var selectReplacement = copyResults[0] - (copyResults[0]*2)
-    numbers.pop()
-    numbers.push(selectReplacement.toString())
-    var toggledNum = numbers.join("")
-    setResults(toggledNum)
-    setDisplay(toggledNum)
+    //toggles the current number in focus
+    var selectNum = numbers.slice(-1)
+    selectNum[0] = parseInt(selectNum[0])
+    var replacement = selectNum[0] - (selectNum[0]*2)
+    var finishedReplacement = replacement.toString()
+    if (finishedReplacement !== "NaN") {
+      numbers.pop()
+      numbers.push(finishedReplacement)
+      var toggledNum = numbers.join("")
+      setResults(toggledNum.replace(/x/g, "*").replace(/÷/g, "/"))
+      setDisplay(toggledNum)
+    }
   }
+
+  function decimalCheck() {
+    //slice correct value to pass for toggleNegative logic, uses additional array method
+    console.log(numbers)
+    if (numbers.length === 1) {
+      var sepNumbers = numbers[0].toString().split("")
+      var numberScope = numberScope-1
+    } else {
+      // eslint-disable-next-line
+      var sepNumbers = numbers
+    }
+    var startIndex = sepNumbers.multiIndexOf(".").slice(-1)[0]
+    var lowerIndex = startIndex - 1
+    var focusedNumber = numbers.slice(lowerIndex).join("")
+    console.log("Total:")
+    console.log(focusedNumber)
+  }
+
+  //extends array object, adds method to find duplicate items index
+  // eslint-disable-next-line
+  Array.prototype.multiIndexOf = function (el) { 
+    var idxs = [];
+    for (var i = this.length - 1; i >= 0; i--) {
+        if (this[i] === el) {
+            idxs.unshift(i);
+        }
+    }
+    return idxs;
+};
 
   return(
     <>
@@ -89,6 +123,7 @@ const Numpad = () => {
         <button className="number-button nums" type="button" value="0" onClick={e => handleInput(e, "value")}>0</button>
         <button className="number-button dec" type="button" value="." onClick={e => handleInput(e, "value")}>.</button>
         <button className="number-button equal" type="button" onClick={() => calculate()}>=</button>
+        <button className="number-button equal" type="button" onClick={() => decimalCheck()}>D</button>
       </div>
     </div>
     </>

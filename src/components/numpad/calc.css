@@ -15,10 +15,12 @@
 .number-container {
     display: flex;
     flex-direction: column;
+    height: 70vh;
 }
 
 .number-row-container {
     display: flex;
+    height: 70vh;
 }
 
 .number-button {

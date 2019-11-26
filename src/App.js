@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import './App.css';
@@ -11,12 +11,11 @@ const store = createStore(reducer)
 
 
 function App() {
-  const messageState = useState( '' );
   return (
     <Provider store ={store}>
       <div className="App">
         <Navbar />
-        <Numpad messageState={messageState} />
+        <Numpad />
       </div>
     </Provider>
   );

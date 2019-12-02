@@ -10,7 +10,7 @@ export const addItem = total => ({
     total
 })
 
-export const removeItem = rmTotal => ({
+export const removeItem = id => ({
     type: REMOVE_MEMORY_ITEM,
-    rmTotal
+    id
 })

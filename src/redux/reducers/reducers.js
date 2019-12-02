@@ -1,10 +1,9 @@
-import { combineReducers } from 'redux'
 import {
   ADD_MEMORY_ITEM,
   REMOVE_MEMORY_ITEM
 } from '../actions/actions'
 
-const addMemory = (state = [], action) => {
+const memoryStorage = (state = [], action) => {
   switch (action.type) {
     case ADD_MEMORY_ITEM:
       return [
@@ -14,23 +13,22 @@ const addMemory = (state = [], action) => {
           total: action.total,
         }
       ]
+    case REMOVE_MEMORY_ITEM:
+      return state.filter(({ id }) => id !== action.id);
     default: 
       return state
   }
 }
 
+/*
 const removeMemory = (state = [], action) => {
   switch (action.type) {
     case REMOVE_MEMORY_ITEM:
-      return state.filter(({ id }) => id !== action.rmTotal);
+      return state.filter(({ id }) => id !== action.id);
     default:
       return state
   }
 }
+*/
 
-const memoryManager = combineReducers({
-  addMemory,
-  removeMemory
-})
-
-export default memoryManager
+export default memoryStorage

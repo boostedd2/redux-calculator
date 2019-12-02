@@ -1,10 +1,14 @@
 import React, { useState } from 'react'
+import { connect } from 'react-redux'
+import { addItem, removeItem } from '../../redux/actions/actions'
 import './calc.css'
+import memoryStorage from '../../redux/reducers/reducers'
+import {store} from '../../App'
 
 var numbers = []
 var dupOps = ['x', '÷', '+', '-', '.']
 
-const Numpad = () => {
+const Numpad = ({addItem, memory}) => {
   //display and calulate are seperate values
   const [results, setResults] = useState( 0 )
   const [display, setDisplay] = useState( 0 )
@@ -38,6 +42,7 @@ const Numpad = () => {
     var calculated = eval(results)
     numbers = [calculated]
     setDisplay(calculated)
+    setResults(calculated)
     if (numbers[0] === 0) {
       numbers = []
       setDisplay( 0 )
@@ -102,7 +107,11 @@ const Numpad = () => {
         }
     }
     return idxs;
-};
+  };
+
+  const memoryAdd = () => {
+    addItem(results);
+  }
 
   return(
     <>
@@ -111,7 +120,7 @@ const Numpad = () => {
     </div>
     <div className="number-container">
       <div className="number-row-container">
-        <button className="number-button mem" type="button">M</button>
+        <button className="number-button mem" type="button" onClick={() => memoryAdd()}>M</button>
         <button className="number-button cls-all" type="button" onClick={() => clearDisplay()}>CE</button>
         <button className="number-button cls" type="button" onClick={() => clearDisplay()}>C</button>
         <button className="number-button operator" type="button" value="x" onClick={e => handleInput(e, "value")}>x</button>
@@ -145,4 +154,12 @@ const Numpad = () => {
   )
 }
 
-export default Numpad
+function mapStateToProps(state) {
+  return {
+    memory: state
+  };
+}
+
+const mapDispatchToProps = { addItem };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Numpad);

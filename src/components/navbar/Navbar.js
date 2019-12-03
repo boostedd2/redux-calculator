@@ -6,7 +6,7 @@ import MemoryList from '../memory/memoryList'
 
 
 
-const Navbar = () => {
+const Navbar = ({results, setResults, display, setDisplay}) => {
   
   function displayMenu() {
     let memorySection = document.getElementById('js-menu');
@@ -23,7 +23,7 @@ const Navbar = () => {
       </div>
     </div>
     <div className="memory-section" id="js-menu">
-      <MemoryList />
+      <MemoryList results={results} setResults={setResults} display={display} setDisplay={setDisplay} />
     </div>
     </>
   )

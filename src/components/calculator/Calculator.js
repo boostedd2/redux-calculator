@@ -1,16 +1,13 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
-import { addItem, removeItem } from '../../redux/actions/actions'
+import { addItem } from '../../redux/actions/actions'
 import './calc.css'
-
 
 var numbers = []
 var dupOps = ['x', '÷', '+', '-', '.']
 
-const Numpad = ({addItem, memory}) => {
+const Numpad = ({addItem, memory, results, setResults, display, setDisplay}) => {
   //display and calulate are seperate values
-  const [results, setResults] = useState( 0 )
-  const [display, setDisplay] = useState( 0 )
 
   function handleInput(e) {
     var lastItem = numbers.slice(-1)[0]

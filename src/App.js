@@ -1,36 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import './container.css'
 import Navbar from './components/navbar/Navbar'
-import Numpad from './components/numpad/Numpad'
-import { addItem, removeItem } from './redux/actions/actions'
+import Calculator from './components/calculator/Calculator'
 import memoryStorage from './redux/reducers/reducers';
 
 export const store = createStore(memoryStorage)
 
-console.log(store.getState())
-
-const unsubscribe = store.subscribe(() => console.log(store.getState()))
-
-store.dispatch(addItem(678))
-store.dispatch(addItem(574))
-store.dispatch(addItem(728))
-
-store.dispatch(removeItem(2))
-
-store.dispatch(addItem(555))
-
-unsubscribe()
-
-
-
 function App() {
+  const [results, setResults] = useState( 0 )
+  const [display, setDisplay] = useState( 0 )
+
   return (
     <Provider store = {store}>
       <div className="App">
-        <Navbar />
-        <Numpad />
+        <Navbar results={results} setResults={setResults} display={display} setDisplay={setDisplay} />
+        <Calculator results={results} setResults={setResults} display={display} setDisplay={setDisplay} />
       </div>
     </Provider>
   );

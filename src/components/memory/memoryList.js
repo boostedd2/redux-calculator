@@ -1,31 +1,28 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { removeItem } from '../../redux/actions/actions'
 import './memorylist.css'
 
-const memoryItems = [
-  "W.I.P Redux Memory",
-  83,
-  62,
-  44,
-  495,
-  3,
-  205,
-  993,
-  2,
-  -40,
-]
-
-const  MemoryList = () => {
+const  MemoryList = ({memory, removeItem}) => {
   return (
     <div className="memory-list-container">
       <div className="memory-list">
-        {memoryItems.map(item => 
-          <div className="memory-item-container">
-            <div className="memory-item">{item}</div>
-            <div className="dismiss-button">X</div>
-          </div>)}
+        {memory.length ? memory.map(item => 
+          <div key={item.id} className="memory-item-container">
+            <div className="memory-item">{item.total}</div>
+            <div className="dismiss-button" onClick={() => removeItem(item.id)}>X</div>
+          </div>): <div className="empty-list">Empty? Add items using the memory button.</div>}
       </div>
     </div>
   )
 }
 
-export default MemoryList;
+function mapStateToProps(state) {
+  return {
+    memory: state
+  };
+}
+
+const mapDispatchToProps = { removeItem };
+
+export default connect(mapStateToProps, mapDispatchToProps)(MemoryList);

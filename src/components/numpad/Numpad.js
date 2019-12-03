@@ -2,8 +2,7 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { addItem, removeItem } from '../../redux/actions/actions'
 import './calc.css'
-import memoryStorage from '../../redux/reducers/reducers'
-import {store} from '../../App'
+
 
 var numbers = []
 var dupOps = ['x', '÷', '+', '-', '.']

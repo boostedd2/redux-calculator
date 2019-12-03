@@ -18,4 +18,12 @@
     margin-left: auto;
     margin-right: 30px;
     color: red;
+    cursor: pointer;
+}
+
+.empty-list {
+    background: rgb(255, 237, 237);
+    border-radius: 10px;
+    padding: 5px;
+    margin: 5px;
 }
